@@ -4,8 +4,10 @@ import './App.css';
 import Login from "./component/signup.js";
 import category from "./component/categories.js";
 import Home from "./component/home.js";
+import profile from "./component/profile.js";
+import history from './history';
 import {
-  BrowserRouter as Router,
+  Router,
   Switch,
   Route,
   Link
@@ -14,13 +16,14 @@ import {
 
 function App() {
   return (
-    <Router>       
+    <Router history={history}>       
 
       <Switch>
         <Route exact path="/" component={Login} />
         <Route path="/category" component={category}/>
         <Route path="/Login" component={Login}/>
         <Route path="/home" component={Home}/>
+        <Route path="/profile" component={profile}/>
       </Switch>
     </Router>
   );

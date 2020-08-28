@@ -326,3 +326,7 @@ footer {
 .bk-white{
   background-color: #fff;
 }
+.valid{
+  border-style: solid;
+  border-color: hsl(0, 100%, 50%);
+}
