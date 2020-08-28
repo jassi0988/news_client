@@ -48,24 +48,25 @@ export default class category extends Component {
         // console.log('Values: '+this.state.selectedId)
         let insertData = {categories : this.state.selectedId,
                         user_id : userDetails[0].id}
-          const url = 'https://backend-newz.herokuapp.com/api/user/selectCat'
-          fetch(url,{
-            method: 'POST',
-            body: JSON.stringify(insertData),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-          })
-          .then(res => res.json())
-            .then(
-              (result) => {
-                localStorage.setItem('loggedData', JSON.stringify(result.data));
-                this.setState({
-                  redirect: true ,                
-                });
-              // toast(result.message);           
-              },
-            )
+                        console.log(insertData)
+          // const url = 'https://backend-newz.herokuapp.com/api/user/selectCat'
+          // fetch(url,{
+          //   method: 'POST',
+          //   body: JSON.stringify(insertData),
+          //   headers: {
+          //       'Content-Type': 'application/json'
+          //   }
+          // })
+          // .then(res => res.json())
+          //   .then(
+          //     (result) => {
+          //       localStorage.setItem('loggedData', JSON.stringify(result.data));
+          //       this.setState({
+          //         redirect: true ,                
+          //       });
+          //     // toast(result.message);           
+          //     },
+          //   )
 
     }
 
