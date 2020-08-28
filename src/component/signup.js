@@ -2,14 +2,15 @@ import React, { Component  } from 'react';
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import {Redirect} from 'react-router-dom';
-
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faAt,faLock,faUser} from '@fortawesome/free-solid-svg-icons'
 toast.configure({
     autoClose: 2000,
     draggable: false,
   });
 
 export default class Login extends Component{
-    constructor(props) {
+    constructor(props) { 
         super(props);
         this.state = {
             fields: {},
@@ -21,8 +22,9 @@ export default class Login extends Component{
             signup_password:'',
             login : true ,
             redirect_home : false,
-            redirect_category : false
+            redirect_category : false,
         };
+     
         const data = localStorage.getItem('loggedData')
         
         if(data === null)
@@ -37,7 +39,6 @@ handleChange =(e)=>{
 
 
   login = (e) =>  {
-      console.log("yes");
     e.preventDefault();
         let fields = {email:this.state.login_email,
             password:this.state.login_password};
@@ -110,13 +111,14 @@ render() {
       else
         return (
 
+           
 
 <div class="section">
     <div class="container">
         <div class="row full-height justify-content-center">
             <div class="col-12 text-center align-self-center py-5">
                 <div class="section pb-5 pt-5 pt-sm-2 text-center">
-                    <h6 class="mb-0 pb-3"><span>Log In </span><span>Sign Up</span></h6>
+                    <h6 class="mb-0 pb-3"><span>Log In </span><span>Sign Up</span></h6>                 
                     <input class="checkbox" type="checkbox" id="reg-log" name="reg-log" />
                     <label for="reg-log"></label>
                     <div class="card-3d-wrap mx-auto">
@@ -129,17 +131,17 @@ render() {
                                             <div class="form-group">
                                                 <input type="email" name="login_email" class="form-style"
                                                     placeholder="Your Email" id="logemail" autocomplete="off" value={this.state.login_email} onChange={this.handleChange}/>
-                                                <i class="input-icon uil uil-at"></i>
+                                                <i class="input-icon uil uil-at"><FontAwesomeIcon icon={faAt} /></i>
                                             </div>
                                             <div class="form-group mt-2">
                                                 <input type="password" name="login_password" class="form-style"
                                                     placeholder="Your Password" id="logpass" autocomplete="off" value={this.state.login_password} onChange={this.handleChange}/>
-                                                <i class="input-icon uil uil-lock-alt"></i>
+                                                   <i class="input-icon uil uil-at"><FontAwesomeIcon icon={faLock} /></i>
                                             </div>
 
                                             <button type="submit" className="btn mt-4" >Submit</button>
                                             <p class="mb-0 mt-4 text-center"><a href="#0" class="link">Forgot your
-                                                    password?</a></p>
+                                                    password?</a></p>                                                   
                                         </div>
                                     </form>
                                 </div>
@@ -152,22 +154,22 @@ render() {
                                         <div class="form-group">
                                             <input type="text" name="signup_firstname" class="form-style"
                                                 placeholder="Your First Name" id="logname" autocomplete="off" value={this.state.signup_firstname} onChange={this.handleChange}/>
-                                            <i class="input-icon uil uil-user"></i>
+                                             <i class="input-icon uil uil-at"><FontAwesomeIcon icon={faUser} /></i>
                                         </div>
                                         <div class="form-group mt-2">
                                             <input type="text" name="signup_lastname" class="form-style"
                                                 placeholder="Your Last Name" id="logname" autocomplete="off" value={this.state.signup_lastname} onChange={this.handleChange}/>
-                                            <i class="input-icon uil uil-user"></i>
+                                                <i class="input-icon uil uil-at"><FontAwesomeIcon icon={faUser} /></i>
                                         </div>
                                         <div class="form-group mt-2">
                                             <input type="email" name="signup_email" class="form-style"
                                                 placeholder="Your Email" id="logemail" autocomplete="off" value={this.state.signup_email} onChange={this.handleChange}/>
-                                            <i class="input-icon uil uil-at"></i>
+                                              <i class="input-icon uil uil-at"><FontAwesomeIcon icon={faAt} /></i>
                                         </div>
                                         <div class="form-group mt-2">
                                             <input type="password" name="signup_password" class="form-style"
                                                 placeholder="Your Password" id="logpass" autocomplete="off" value={this.state.signup_password} onChange={this.handleChange}/>
-                                            <i class="input-icon uil uil-lock-alt"></i>
+                                               <i class="input-icon uil uil-at"><FontAwesomeIcon icon={faLock} /></i>
                                         </div>
                                         <button type="submit" className="btn mt-4" >Submit</button>
                                     </form>    
