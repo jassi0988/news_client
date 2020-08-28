@@ -1,6 +1,7 @@
 import React, { Component  } from 'react';
 import {Redirect} from 'react-router-dom';
 import '../home.css';
+import history from './../history';
 export default class Home extends Component
 {
     constructor(props) {
@@ -43,7 +44,7 @@ render()
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active"><a href="#" class="nav-link">NEWS</a></li>
             <li class="nav-item"><a href="#" class="nav-link">TRAVEL</a></li>
-            <li class="nav-item"><a href="#" class="nav-link">EAT&DRINK</a></li>
+            <li class="nav-item"><a onClick={()=> history.push('/profile')} class="nav-link">ProfileK</a></li>
             <li class="nav-item"><a href="#" class="nav-link">CONTACT</a></li>
             <li class="nav-item"><a onClick={()=>{this.signout()}} class="nav-link">SIGN OUT</a></li>
               

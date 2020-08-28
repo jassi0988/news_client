@@ -5,7 +5,7 @@ import {Redirect} from 'react-router-dom';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faAt,faLock,faUser} from '@fortawesome/free-solid-svg-icons'
 toast.configure({
-    autoClose: 2000,
+    autoClose: 1700,
     draggable: false,
   });
 
@@ -23,6 +23,9 @@ export default class Login extends Component{
             login : true ,
             redirect_home : false,
             redirect_category : false,
+            emailError: "",
+            passswordError : "",
+            flag: 0
         };
      
         const data = localStorage.getItem('loggedData')
@@ -37,9 +40,36 @@ handleChange =(e)=>{
      this.setState({ [e.target.name]: e.target.value });
   }
 
+validateLogin =(e)=>
+{
+    let message = "Please fill the form"
+    if(!this.state.login_email || !this.state.login_password)
+    {
+        this.state.flag = 1
+        toast(message);
+        return false
+    }
+    return true;
+}
+
+validateSignup =(e)=>
+{
+    let message = "Please fill the form"
+    if(!this.state.signup_email || !this.state.signup_password || !this.state.signup_firstname || !this.state.signup_lastname)
+    {
+    toast(message);
+    return false
+    }
+    return true;
+}
+
 
   login = (e) =>  {
     e.preventDefault();
+    const valid = this.validateLogin();
+    if(valid)
+    {
+
         let fields = {email:this.state.login_email,
             password:this.state.login_password};
         
@@ -55,8 +85,10 @@ handleChange =(e)=>{
             .then(data => {
                 if(data.status === 200){
                     localStorage.setItem('loggedData', JSON.stringify(data.data));
-                    console.log(localStorage.getItem('loggedData'));              
+                    // console.log(localStorage.getItem('loggedData'));
+                    toast("Welcome "+ JSON.parse(localStorage.getItem('loggedData'))[0].first_name)            
                     this.setState({
+                        
                         redirect_home : true
                       });
                       
@@ -65,12 +97,16 @@ handleChange =(e)=>{
                 }
               
             });  
-            console.log(this.state.fields.emailid);
-            console.log(this.state.fields.password);
+            // console.log(this.state.fields.emailid);
+            // console.log(this.state.fields.password);
+    }
 }
 
 signup = (e) =>  {
   e.preventDefault();
+  const valid = this.validateSignup();
+    if(valid)
+    {
       let fields = {firstName:this.state.signup_firstname,
                     lastName:this.state.signup_lastname,
                     emailId:this.state.signup_email,
@@ -95,6 +131,7 @@ signup = (e) =>  {
               }
             
           }); 
+        }
 }
 
 render() {
@@ -125,11 +162,11 @@ render() {
                         <div class="card-3d-wrapper">
                             <div class="card-front">
                                 <div class="center-wrap">
-                                    <form onSubmit={this.login}>
+                                    <form onSubmit={this.login} >
                                         <div class="section text-center">
                                             <h4 class="mb-4 pb-3">Log In</h4>
                                             <div class="form-group">
-                                                <input type="email" name="login_email" class="form-style"
+                                                    <input type="email" name="login_email" class="form-style" 
                                                     placeholder="Your Email" id="logemail" autocomplete="off" value={this.state.login_email} onChange={this.handleChange}/>
                                                 <i class="input-icon uil uil-at"><FontAwesomeIcon icon={faAt} /></i>
                                             </div>

@@ -42,7 +42,7 @@ export default class category extends Component {
 
     sendData = (e) =>  {
         let userDetails = JSON.parse(localStorage.getItem('loggedData'));
-        e.preventDefault();
+        // e.preventDefault();
         // console.log('Values: '+this.state.selectedId)
         let insertData = {categories : this.state.selectedId,
                         user_id : userDetails[0].id}
