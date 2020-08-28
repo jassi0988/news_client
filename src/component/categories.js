@@ -1,10 +1,8 @@
 import '../category.css';
 import {Redirect} from 'react-router-dom';
 import React,{ Component } from 'react';
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
 import { MultiSelect } from '@progress/kendo-react-dropdowns';
-
-const sports = [ "Baseball", "Basketball", "Cricket", "Field Hockey", "Football", "Table Tennis", "Tennis", "Volleyball" ];
 
 
 
