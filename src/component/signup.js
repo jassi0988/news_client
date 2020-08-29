@@ -121,8 +121,9 @@ signup = (e) =>  {
           .then(response => response.json())
           .then(data => {
               if(data.status === 200){
-                  alert(data.message);
-                  localStorage.setItem('loggedData', JSON.stringify(data.data));              
+                
+                  localStorage.setItem('loggedData', JSON.stringify(data.data)); 
+                  toast("You are sucessfully signup "+ JSON.parse(localStorage.getItem('loggedData'))[0].first_name)             
                   this.setState({
                       redirect_category : true
                     });

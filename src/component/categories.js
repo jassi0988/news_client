@@ -1,8 +1,10 @@
 import '../category.css';
 import {Redirect} from 'react-router-dom';
 import React,{ Component } from 'react';
-// import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom';
 import { MultiSelect } from '@progress/kendo-react-dropdowns';
+
+const sports = [ "Baseball", "Basketball", "Cricket", "Field Hockey", "Football", "Table Tennis", "Tennis", "Volleyball" ];
 
 
 
@@ -15,6 +17,7 @@ export default class category extends Component {
           selectedId : [],
           selectedcat : [],
           login: true,
+          redirect : false ,
           userDetails : JSON.parse(localStorage.getItem('loggedData'))
         };
         const data = localStorage.getItem('loggedData')
@@ -46,25 +49,24 @@ export default class category extends Component {
         // console.log('Values: '+this.state.selectedId)
         let insertData = {categories : this.state.selectedId,
                         user_id : userDetails[0].id}
-                        console.log(insertData)
-          // const url = 'https://backend-newz.herokuapp.com/api/user/selectCat'
-          // fetch(url,{
-          //   method: 'POST',
-          //   body: JSON.stringify(insertData),
-          //   headers: {
-          //       'Content-Type': 'application/json'
-          //   }
-          // })
-          // .then(res => res.json())
-          //   .then(
-          //     (result) => {
-          //       localStorage.setItem('loggedData', JSON.stringify(result.data));
-          //       this.setState({
-          //         redirect: true ,                
-          //       });
-          //     // toast(result.message);           
-          //     },
-          //   )
+          const url = 'https://backend-newz.herokuapp.com/api/user/selectCat'
+          fetch(url,{
+            method: 'POST',
+            body: JSON.stringify(insertData),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+          })
+          .then(res => res.json())
+            .then(
+              (result) => {
+                localStorage.setItem('loggedData', JSON.stringify(result.data));
+                this.setState({
+                  redirect: true ,                
+                });
+              // toast(result.message);           
+              },
+            )
 
     }
 
