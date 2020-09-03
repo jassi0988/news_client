@@ -3436,7 +3436,7 @@
  
  .tab-content > .active {
    display: block; }
- 
+/*  
  .navbar {
    position: relative;
    display: -webkit-box;
@@ -3450,7 +3450,7 @@
    -webkit-box-pack: justify;
    -ms-flex-pack: justify;
    justify-content: space-between;
-   padding: 0.5rem 1rem; }
+   padding: 0.5rem 1rem; } */
    .navbar > .container,
    .navbar > .container-fluid {
      display: -webkit-box;
@@ -8014,7 +8014,7 @@
    transition: .3s all ease;
    color: #ffd369; }
    a:hover, a:focus {
-     text-decoration: none;
+     text-decoration: none !important;
      color: #ffd369;
      outline: none !important; }
  
@@ -8029,8 +8029,8 @@
  
  .ftco-navbar-light {
    background: transparent !important;
-   position: absolute;
-   top: 20px;
+   position: fixed !important;
+   /* top: 20px; */
    left: 0;
    right: 0;
    z-index: 3; }
@@ -8204,7 +8204,7 @@
    max-width: 1210px; }
  
  .hero-wrap {
- 
+  top: 74px;
    width: 100%;
    height: 100%;
    position: inherit;
@@ -8488,7 +8488,7 @@
      font-size: 14px;
      display: inline-block;
      margin-bottom: 10px;
-     color: rgba(0, 0, 0, 0.2);
+     color: rgba(0, 0, 0, 0.4);
      text-transform: uppercase; }
    .case .text h2 {
      font-size: 40px;

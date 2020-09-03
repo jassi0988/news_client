@@ -4,6 +4,7 @@ import { MultiSelect } from '@progress/kendo-react-dropdowns';
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import {Redirect} from 'react-router-dom';
+import Header from './common/header'
 const sports = [ "Baseball", "Basketball", "Cricket", "Field Hockey", "Football", "Table Tennis", "Tennis", "Volleyball" ];
 export default class profile extends Component
 {
@@ -62,13 +63,13 @@ export default class profile extends Component
             //console.log(array)       
             result.map((userId) =>(
                 this.state.array.map((id) =>(
-                    userId.id==id.replace(/[&\/\\#+()$~%.'":*?<>{}]/g,'') && 
+                    userId.id===id.replace(/[&\/\\#+()$~%.'":*?<>{}]/g,'') && 
                     this.setState({usercategory : this.state.usercategory.concat(userId.name)})                            
                 ))                            
             ))
             this.state.userData.forEach(element => {
                 this.state.usercategory.forEach(e => {
-                    if( e== element.name){
+                    if( e=== element.name){
                        this.state.selectedArr.push(element)
                         return this.state.selectedArr
                     }
@@ -150,36 +151,41 @@ export default class profile extends Component
             return <Redirect to='/home' />
         }
     return(
+ 
     <div class="section">
+         <Header/>
     <div class="container">
         <div class="row full-height justify-content-center">
-            <div class="col-12 text-center align-self-center py-5">
-                <div class="section pb-5 pt-5 pt-sm-2 text-center">  
+            <div class="col-12  align-self-center py-5">
+                <div class="section pb-5 pt-5 pt-sm-2">  
                 <div class="card-3d-wrap mx-auto">
                 <div class="card-3d-wrapper"></div>
                 <div>
                     <div class="center-wrap">
-                        <div class="section text-center">
+                        <div class="section">
                         <form onSubmit={this.sendData}>
                             <h4 class="mb-4 pb-3">Profile</h4>
                             <div class="form-group">
+                                <label>First Name</label>
                                 <input type="text" name="firstname" class="form-style"
                                     placeholder="Your First Name" id="logname" autocomplete="off" value={this.state.firstname} onChange={this.handleChange}/>
                                 <i class="input-icon uil uil-user"></i>
                             </div>
                             <div class="form-group mt-2">
+                            <label>Last Name</label>
                                 <input type="text" name="lastname" class="form-style"
                                     placeholder="Your Last Name" id="logname" autocomplete="off" value={this.state.lastname} onChange={this.handleChange}/>
                                 <i class="input-icon uil uil-user"></i>
                             </div>
                             <div class="form-group mt-2">
+                            <label>Email</label>
                                 <input type="email" name="email" class="form-style"
                                     placeholder="Your Email" id="logemail" autocomplete="off" value={this.state.email} onChange={this.handleChange}/>
                                 <i class="input-icon uil uil-at"></i>
                             </div>
-                            <span >
-                                <div className="example-wrapper" >
+                         
                                     <div class="form-group mt-2">
+                                    <label>Categories</label>
                                         <MultiSelect
                                             data={this.state.userData.map((opt,key) =>(
                                                 opt                         
@@ -193,9 +199,10 @@ export default class profile extends Component
                                                                                          
                                         />
                                     </div>
-                                </div>
-                            </span>
-                            <button type="submit" className="btn mt-4" >Submit</button>
+                            <div class="form-group mt-2">
+                            <button type="submit" className="btn mt-4" >Submit</button> 
+                            </div>
+                            
                         </form>    
                         </div>
                     </div>
