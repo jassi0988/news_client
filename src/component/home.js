@@ -80,7 +80,7 @@ render()
     }
   return (
     <div class="bk-white">
-        <Header/>
+        {/* <Header/> */}
         <div class="hero-wrap js-fullheight" style={styleRed} data-stellar-background-ratio="0.5">
         {/* <div class="hero-wrap js-fullheight"  data-stellar-background-ratio="0.5"> */}
             <div class="overlay"></div>

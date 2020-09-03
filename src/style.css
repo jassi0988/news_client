@@ -340,3 +340,9 @@ footer {
 form .form-group label{
   text-align: left !important;
 }
+.news-detail .loaded{
+  width:100%;
+}
+.news-detail {
+  color:#414141;
+}
