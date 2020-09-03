@@ -39,8 +39,7 @@ export default class category extends Component {
                 userData: result
               });
             },
-          ) 
-          
+          )          
       }
 
     sendData = (e) =>  {
@@ -107,9 +106,10 @@ export default class category extends Component {
                                 dataItemKey="id"
                                 // onChange={this.call(this.key)}
                                 value={this.state.value}                                               
-                            />
+                            /> 
+                             <button type="submit" className="btn mt-4" >Submit</button>
                         </div>
-                        <button>Submit</button>
+                      
                     </div>
                 </form>
                 </span>

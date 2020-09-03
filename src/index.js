@@ -13,7 +13,7 @@ import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Header />
+    
     <App />
     <Footer />
   </React.StrictMode>,

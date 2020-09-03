@@ -5,6 +5,7 @@ import Login from "./component/signup.js";
 import category from "./component/categories.js";
 import Home from "./component/home.js";
 import profile from "./component/profile.js";
+import favourite from "./component/favourite.js";
 import history from './history';
 import {
   Router,
@@ -24,6 +25,7 @@ function App() {
         <Route path="/login" component={Login}/>
         <Route path="/home" component={Home}/>
         <Route path="/profile" component={profile}/>
+        <Route path="/favourite" component={favourite}/>
       </Switch>
     </Router>
   );

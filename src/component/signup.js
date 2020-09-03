@@ -178,8 +178,7 @@ render() {
                                             </div>
 
                                             <button type="submit" className="btn mt-4" >Submit</button>
-                                            <p class="mb-0 mt-4 text-center"><a href="#0" class="link">Forgot your
-                                                    password?</a></p>                                                   
+                                                                                               
                                         </div>
                                     </form>
                                 </div>

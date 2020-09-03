@@ -7,6 +7,8 @@ export default class Home extends Component
     constructor(props) {
         super(props);
         this.state = {
+          category : [],
+          news : [],
             login : true ,
             dummy :JSON.parse(localStorage.getItem('loggedData'))
         };
@@ -16,6 +18,47 @@ export default class Home extends Component
         {
             this.state.login = false 
         }
+    }
+    componentDidMount() {
+      const url = 'https://backend-newz.herokuapp.com/api/user/categories'
+      fetch(url)
+        .then(res => res.json())
+        .then(
+          (result) => {
+            this.setState({
+              category: result
+            });
+          },
+        )  
+        const requestOptions = {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          // body: JSON.stringify(fields)
+      };
+
+      fetch('http://backend-newz.herokuapp.com/api/admin/newsListByCategory', requestOptions)
+          .then(response => response.json())
+          .then(data => {
+            this.setState({                      
+              news : data
+              });
+              console.log(this.state.news)
+              
+              // if(data.status === 200){  
+              //   alert("h")       
+              //     this.setState({                      
+              //       news : data
+              //       });
+              //       console.log(this.state.news)
+                    
+              // }else{
+              //     // toast(data.message);
+              // }
+            
+          });
+        
+        
+
     }
 
     signout()
@@ -42,11 +85,13 @@ render()
 
         <div class="collapse navbar-collapse" id="ftco-nav">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item active"><a href="#" class="nav-link">NEWS</a></li>
-            <li class="nav-item"><a href="#" class="nav-link">TRAVEL</a></li>
-            <li class="nav-item"><a onClick={()=> history.push('/profile')} class="nav-link">ProfileK</a></li>
-            <li class="nav-item"><a href="#" class="nav-link">CONTACT</a></li>
-            <li class="nav-item"><a onClick={()=>{this.signout()}} class="nav-link">SIGN OUT</a></li>
+          <li class="nav-item active"><a onClick={()=> history.push('/favourite')} class="nav-link">Favourites</a></li>
+            {this.state.category.map((opt) =>(<li class="nav-item active"><a href="#" class="nav-link">{opt.name}</a></li>))}
+            {/* <li class="nav-item active"><a href="#" class="nav-link">NEWS</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">TRAVEL</a></li>           
+            <li class="nav-item"><a href="#" class="nav-link">CONTACT</a></li> */}
+            <li class="nav-item"><a onClick={()=> history.push('/profile')} class="nav-link">Profile</a></li>
+            <li class="nav-item"><a onClick={()=>{this.signout()}} class="nav-link">Signout</a></li>
               
           </ul>
         </div>
@@ -81,16 +126,19 @@ render()
    			<div class="row">
    				<div class="col-md-12">
    					<div class="case">
+               {this.state.news.map((opt) =>(
+                                                                 
+                                  
    						<div class="row">
    							<div class="col-md-6 col-lg-6 col-xl-8 d-flex">
-                                   <img  class="img w-100 mb-3 mb-md-0" src="images/image_2.jpg"/>
+                                   <img  class="img w-100 mb-3 mb-md-0" src={opt.img}/>
                                    {/* <img src="https://images.pexels.com/photos/112460/pexels-photo-112460.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"/> */}
    								{/* <a href="blog-single.html" class="img w-100 mb-3 mb-md-0" style="background-image: url(images/image_1.jpg);"></a> */}
    							</div>
    							<div class="col-md-6 col-lg-6 col-xl-4 d-flex">
    								<div class="text w-100 pl-md-3">
-   									<span class="subheading">Illustration</span>
-   									<h2><a href="blog-single.html">Eat your favourite poutine at your favourite restaurant today!</a></h2>
+                      <span class="subheading">{opt.category_name}</span>
+                        <h2><a href="blog-single.html">{opt.title}</a></h2>
    									<ul class="media-social list-unstyled">
 			                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
 			                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
@@ -102,6 +150,8 @@ render()
    								</div>
    							</div>
    						</div>
+
+                ))}
    					</div>
    				</div>
    			</div>

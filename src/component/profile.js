@@ -29,6 +29,7 @@ export default class profile extends Component
             email:'',
             password:'',
             selectedId : [],
+            selectedArr  : [],
             redirect : false
             
         }
@@ -65,6 +66,16 @@ export default class profile extends Component
                     this.setState({usercategory : this.state.usercategory.concat(userId.name)})                            
                 ))                            
             ))
+            this.state.userData.forEach(element => {
+                this.state.usercategory.forEach(e => {
+                    if( e== element.name){
+                       this.state.selectedArr.push(element)
+                        return this.state.selectedArr
+                    }
+                });
+               
+            });
+            console.log(this.state.selectedArr);
         },
         )       
         
@@ -85,10 +96,20 @@ export default class profile extends Component
         });    
         console.log(this.state.selectedId) 
     }
-    call()
-    {
-        return this.state.usercategory
-    }
+    // call()
+    // {
+    //     this.state.userData.forEach(element => {
+    //         this.state.usercategory.forEach(e => {
+    //             if( e== element.name){
+    //                this.state.selectedArr.push(element)
+    //                 return this.state.selectedArr
+    //             }
+    //         });
+           
+    //     });
+      
+
+    // }
 
     sendData = (e) =>  {
         e.preventDefault();
@@ -161,14 +182,14 @@ export default class profile extends Component
                                     <div class="form-group mt-2">
                                         <MultiSelect
                                             data={this.state.userData.map((opt,key) =>(
-                                                opt.name                             
+                                                opt                         
                                               ))}
                                             
                                             textField="name"
                                             dataItemKey="id"
-                                            onChange={this.onChange}
-                                            defaultValue={this.call()}
-                                            value={this.state.value}  
+                                            // onChange={this.onChange}
+                                            // defaultValue={this.state.selectedArr}
+                                            value={this.state.selectedArr}  
                                                                                          
                                         />
                                     </div>
