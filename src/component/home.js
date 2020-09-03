@@ -68,6 +68,9 @@ export default class Home extends Component
         this.forceUpdate()
 
     }
+
+
+
 render() 
 {
     const styleRed = { backgroundImage: "url('images/bg_main.jpg')",height:"566px" };
@@ -138,14 +141,14 @@ render()
    							<div class="col-md-6 col-lg-6 col-xl-4 d-flex">
    								<div class="text w-100 pl-md-3">
                       <span class="subheading">{opt.category_name}</span>
-                        <h2><a href="blog-single.html">{opt.title}</a></h2>
+                        <h2><a onClick={()=>history.push('/detail/'+opt.id)}>{opt.title}</a></h2>
    									<ul class="media-social list-unstyled">
 			                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
 			                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
 			                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
 			              </ul>
    									<div class="meta">
-   										<p class="mb-0"><a href="#">11/13/2019</a> | <a href="#">12 min read</a></p>
+   										<p class="mb-0"><a href="#">{opt.created_at.toString()}</a></p>
    									</div>
    								</div>
    							</div>
