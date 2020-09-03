@@ -1,6 +1,5 @@
 import {Redirect} from 'react-router-dom';
 import React,{ Component } from 'react';
-import '../detailstyle.css';
 import ReactDOM from 'react-dom';
 
 
