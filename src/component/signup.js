@@ -138,14 +138,14 @@ signup = (e) =>  {
 render() {
 
     if (this.state.login) {
-        return <Redirect to='/home' />
+        return <Redirect to='/home/all' />
       }
       else if (this.state.redirect_category) {
         return <Redirect to='/category' />
       }
       else if (this.state.redirect_home) {
         window.location.reload()
-        return <Redirect to='/home' />
+        return <Redirect to='/home/all' />
       }
       else
         return (
