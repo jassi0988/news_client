@@ -32001,3 +32001,6 @@ svg .k-var--gauge-track {
 .k-map .k-attribution {
   background-color: rgba(255, 255, 255, 0.8);
 }
+.ftco-navbar-light{
+  top:0px !important;
+}

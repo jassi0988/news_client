@@ -42,12 +42,14 @@ export default class category extends Component {
           )          
       }
 
-    sendData = (e) =>  {
+      sendData = (e) =>  {
+       console.log("value:")
         let userDetails = JSON.parse(localStorage.getItem('loggedData'));
-        // e.preventDefault();
+         e.preventDefault();
         // console.log('Values: '+this.state.selectedId)
         let insertData = {categories : this.state.selectedId,
                         user_id : userDetails[0].id}
+                        console.log(insertData)
           const url = 'https://backend-newz.herokuapp.com/api/user/selectCat'
           fetch(url,{
             method: 'POST',
@@ -86,13 +88,15 @@ export default class category extends Component {
     }
     if(this.state.redirect || this.state.userDetails[0].categories!=null)
     {     
-        return <Redirect to='/home/all' />     
+      window.location.reload()  
+        return <Redirect to='/home/all' />   
+      
     }
     else if(this.state.login)
     {
         return ( 
             <span >
-                <form onSubmit={this.sendData}>
+              <form onSubmit={this.sendData}>
                     <div className="example-wrapper">
                         <div class="category">
                             <div class="multi-head">Welcome {this.state.userDetails[0].first_name}</div>
@@ -114,7 +118,7 @@ export default class category extends Component {
                 </form>
                 </span>
             ); 
-    }
+     }
     
 }
 }

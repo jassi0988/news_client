@@ -104,3 +104,11 @@
 [0904/141655.632:ERROR:crash_report_database_win.cc(445)] failed to read records
 [0904/142354.264:ERROR:file_io.cc(90)] ReadExactly: expected 10136, observed 0
 [0904/142354.264:ERROR:crash_report_database_win.cc(445)] failed to read records
+[0904/143513.123:ERROR:file_io.cc(90)] ReadExactly: expected 10136, observed 0
+[0904/143513.123:ERROR:crash_report_database_win.cc(445)] failed to read records
+[0904/145024.753:ERROR:file_io.cc(90)] ReadExactly: expected 10136, observed 0
+[0904/145024.753:ERROR:crash_report_database_win.cc(445)] failed to read records
+[0904/145248.474:ERROR:file_io.cc(90)] ReadExactly: expected 10136, observed 0
+[0904/145248.475:ERROR:crash_report_database_win.cc(445)] failed to read records
+[0904/172634.842:ERROR:file_io.cc(90)] ReadExactly: expected 10136, observed 0
+[0904/172634.842:ERROR:crash_report_database_win.cc(445)] failed to read records

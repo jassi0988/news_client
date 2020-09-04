@@ -89,7 +89,7 @@ render()
             <div class="container">
             <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start" data-scrollax-parent="true">
                 <div class="col-md-12">
-                    <h2 class="subheading">Welcome, {this.props.match.params.name}</h2>
+                    <h2 class="subheading">Welcome, {JSON.parse(localStorage.getItem('loggedData'))[0].first_name}</h2>
                     <h1 class="mb-4 mb-md-0">MontrealTimes</h1>
                     <div class="row">
                         <div class="col-md-7">

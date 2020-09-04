@@ -12,6 +12,7 @@ export default class profile extends Component
     
     constructor(props)
     {
+        console.log("constructor")
         super(props);
         this.state = 
         {
@@ -31,70 +32,81 @@ export default class profile extends Component
             email:'',
             password:'',
             selectedId : [],
+            selectedIds : [],
             selectedArr  : [],
-            redirect : false
+            redirect : false,
+            id : ""
+            
             
         }
+        this.state.id = this.state.userDetails[0].id
         this.state.firstname = this.state.userDetails[0].first_name
         this.state.lastname = this.state.userDetails[0].last_name
         this.state.email = this.state.userDetails[0].email_id
         this.state.category = this.state.userDetails[0].categories
-        //this.state.newcat = this.state.category.split(',')
-        // this.state.newcat = this.state.category.replace(/[&\/\\#+()$~%.'":*?<>{}]/g,'')
-        // this.state.newcat.forEach(element => {
-        //     this.state.newcat1.push(this.state.newcat.split(','))
-        // });
-        
-        // this.state.newcat1 = this.state.newcat.split()
-        
+
 
     }
 
     componentDidMount()
     {
-    const url = 'https://backend-newz.herokuapp.com/api/user/categories'
-    fetch(url)
-        .then(res => res.json())
-        .then(
-        (result) => {
-            this.setState({
-            userData: result
-            });
-        });
+        
+        this.state.category = this.state.userDetails[0].categories
+        const url = 'https://backend-newz.herokuapp.com/api/user/categories'
+        fetch(url)
+          .then(res => res.json())
+          .then(
+            (result) => {
+              this.setState({
+                userData: result   
+              });
+              this.state.array = this.state.category.split(",")
+              result.map((userId) =>(
+                this.state.array.map((id) =>(
+                    parseInt(userId.id)===parseInt(id.replace(/[&\/\\#+()$~%.'":*?<>{}]/g,''))
+                    && 
+                    this.setState({selectedArr : this.state.selectedArr.concat(userId.name)})                            
+                ))                            
+            ))
+            },
+          )
     }
 
-    handleChange =(e)=>{
-        this.setState({ [e.target.name]: e.target.value });
-     }
+    // handleChange = (event) => {
+    //     this.setState({
+    //         value: event.target.value
+    //     });
+    // }
 
-    onChange = (event) => {       
+    onChange = (event) => {      
         this.setState({
-            value: [ ...event.target.value ]        
+            selectedArr: [ ...event.target.value ]        
         });    
         this.setState({
-            selectedId: [ ...event.target.value.map((opt) =>(opt.id)) ] 
-        });   
+            selectedId: [ ...event.target.value.map((opt) =>(opt)) ] 
+        });
     }
-    call()
-    {
-       
-        this.state.array=this.state.category.split(",")
-         this.state.array.map((id) =>(                                    
-            this.state.userData.map((userId) =>(
-                userId.id===parseInt(id.replace(/[&\/\\#+()$~%.'":*?<>{}]/g,'')) && 
-                this.setState({selectedArr :userId.name})
-            ))
-            ))
-            console.log(this.state.selectedArr)
-    }
+    
 
     sendData = (e) =>  {
         e.preventDefault();
-        
-            let fields = {firstName:this.state.firstname,
-                          lastName:this.state.lastname,
-                          emailId:this.state.email,
-                          categories : this.state.selectedId};      
+            this.state.userData.forEach(element => {
+                console.log(element)
+                this.state.selectedArr.forEach(e => {
+                    if(element.name===e){
+                    console.log(element.id)
+                    this.state.selectedIds.push(element.id);
+                    }
+                    // this.state.selectedId.push(element.id);
+                });
+            });
+            let fields = {
+                        id : this.state.id,
+                        first_name:this.state.firstname,
+                          last_name:this.state.lastname,
+                          email_id:this.state.email,
+                          categories : this.state.selectedIds}; 
+                          
             const requestOptions = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -122,15 +134,14 @@ export default class profile extends Component
 
     render()
     {
-       
+        
         if(this.state.redirect)
         {
-            return <Redirect to='/home' />
+            return <Redirect to='/home/all' />
         }
     return(
         
     <div class="section">
-         <Header/>
     <div class="container">
         <div class="row full-height justify-content-center">
             <div class="col-12  align-self-center py-5">
@@ -160,19 +171,17 @@ export default class profile extends Component
                                     placeholder="Your Email" id="logemail" autocomplete="off" value={this.state.email} onChange={this.handleChange}/>
                                 <i class="input-icon uil uil-at"></i>
                             </div>
-                         
                                     <div class="form-group mt-2">
                                     <label>Categories</label>
                                         <MultiSelect
-                                            data={this.state.userData.map((opt,key) =>(
-                                                opt                         
-                                              ))}
+                                            data={this.state.userData.map((opt)=>(
+                                                opt.name
+                                            ))}
                                             
-                                            textField="name"
-                                            dataItemKey="id"
-                                            // onChange={this.onChange}
-                                            // defaultValue={this.state.selectedArr}
                                             
+                                            
+                                            onChange={this.onChange}  
+                                            value = {this.state.selectedArr}
                                                                                          
                                         />
                                     </div>
