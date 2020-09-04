@@ -29,12 +29,13 @@ export default class favourite extends Component {
           .then(
             (result) => {
               this.setState({
-                userData: result
+                userData: result   
               });
               this.state.array = this.state.category.split(",")
               result.map((userId) =>(
                 this.state.array.map((id) =>(
-                    userId.id===id.replace(/[&\/\\#+()$~%.'":*?<>{}]/g,'') && 
+                    parseInt(userId.id)===parseInt(id.replace(/[&\/\\#+()$~%.'":*?<>{}]/g,''))
+                    && 
                     this.setState({usercategory : this.state.usercategory.concat(userId.name)})                            
                 ))                            
             ))
