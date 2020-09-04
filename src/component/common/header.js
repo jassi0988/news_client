@@ -61,6 +61,7 @@ export default class Home extends Component
     }
     render() 
     {
+      if(this.state.login){
       return (
         <nav class="navbar px-md-0 navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
     <div class="container">
@@ -81,5 +82,14 @@ export default class Home extends Component
     </div>
   </nav>
       )
-    }
+      }
+      else{
+        return (
+          <nav class="navbar px-md-0 navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+          <div class="container">
+            <a class="navbar-brand" href="/">Montreal<i> Times</i></a>
+          </div>
+          </nav>
+        )
+      }    }
 }
