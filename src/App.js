@@ -7,6 +7,7 @@ import profile from "./component/profile.js";
 import favourite from "./component/favourite.js";
 import detail from "./component/detail.js";
 import history from './history';
+
 import {
   Router,
   Switch,

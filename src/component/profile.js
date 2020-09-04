@@ -5,6 +5,7 @@ import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import {Redirect} from 'react-router-dom';
 import Header from './common/header'
+import { useImperativeHandle } from 'react';
 const sports = [ "Baseball", "Basketball", "Cricket", "Field Hockey", "Football", "Table Tennis", "Tennis", "Volleyball" ];
 export default class profile extends Component
 {
@@ -59,29 +60,7 @@ export default class profile extends Component
             this.setState({
             userData: result
             });
-             this.state.array = this.state.category.split(",") 
-            //console.log(array)       
-            result.map((userId) =>(
-                this.state.array.map((id) =>(
-                    userId.id===id.replace(/[&\/\\#+()$~%.'":*?<>{}]/g,'') && 
-                    this.setState({usercategory : this.state.usercategory.concat(userId.name)})                            
-                ))                            
-            ))
-            this.state.userData.forEach(element => {
-                this.state.usercategory.forEach(e => {
-                    if( e=== element.name){
-                       this.state.selectedArr.push(element)
-                        return this.state.selectedArr
-                    }
-                });
-               
-            });
-            console.log(this.state.selectedArr);
-        },
-        )       
-        
-        
-        
+        });
     }
 
     handleChange =(e)=>{
@@ -94,23 +73,20 @@ export default class profile extends Component
         });    
         this.setState({
             selectedId: [ ...event.target.value.map((opt) =>(opt.id)) ] 
-        });    
-        console.log(this.state.selectedId) 
+        });   
     }
-    // call()
-    // {
-    //     this.state.userData.forEach(element => {
-    //         this.state.usercategory.forEach(e => {
-    //             if( e== element.name){
-    //                this.state.selectedArr.push(element)
-    //                 return this.state.selectedArr
-    //             }
-    //         });
-           
-    //     });
-      
-
-    // }
+    call()
+    {
+       
+        this.state.array=this.state.category.split(",")
+         this.state.array.map((id) =>(                                    
+            this.state.userData.map((userId) =>(
+                userId.id===parseInt(id.replace(/[&\/\\#+()$~%.'":*?<>{}]/g,'')) && 
+                this.setState({selectedArr :userId.name})
+            ))
+            ))
+            console.log(this.state.selectedArr)
+    }
 
     sendData = (e) =>  {
         e.preventDefault();
@@ -146,12 +122,13 @@ export default class profile extends Component
 
     render()
     {
+       
         if(this.state.redirect)
         {
             return <Redirect to='/home' />
         }
     return(
- 
+        
     <div class="section">
          <Header/>
     <div class="container">
@@ -195,7 +172,7 @@ export default class profile extends Component
                                             dataItemKey="id"
                                             // onChange={this.onChange}
                                             // defaultValue={this.state.selectedArr}
-                                            value={this.state.selectedArr}  
+                                            
                                                                                          
                                         />
                                     </div>
