@@ -88,7 +88,7 @@ export default class category extends Component {
     }
     if(this.state.redirect || this.state.userDetails[0].categories!=null)
     {     
-      window.location.reload()  
+      // window.location.reload()  
         return <Redirect to='/home/all' />   
       
     }
