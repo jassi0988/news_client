@@ -144,6 +144,7 @@ render() {
         return <Redirect to='/category' />
       }
       else if (this.state.redirect_home) {
+        window.location.reload()
         return <Redirect to='/home' />
       }
       else
