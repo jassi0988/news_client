@@ -343,6 +343,16 @@ form .form-group label{
 .news-detail .loaded{
   width:100%;
 }
+.news-detail .c-video__image{
+  width:100%;
+}
+/* .news-detail img{
+  width:100%;
+} */
+
 .news-detail {
   color:#414141;
+}
+.pd-top{
+  padding-top:100px
 }

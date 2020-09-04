@@ -10,7 +10,8 @@ export default class detail extends Component
     {
         super(props);
         this.state = {
-          news: ""
+          news: "",
+          recent : ""
         };
     }
 
@@ -27,8 +28,10 @@ export default class detail extends Component
             .then(response => response.json())
             .then(data => {                                
                     this.setState({                      
-                        news : data.data
+                        news : data.data,
+                        recent : data.recent
                         }); 
+                        console.log(this.state.recent)
             }); 
     }
 
@@ -36,9 +39,10 @@ export default class detail extends Component
     {
     
         return ( 
-            <div class="container bk-white ">
+            <div class="bk-white">
+            <div class="container">
                 
-                <div class="row">
+                <div class="row pd-top">
                 {(this.state.news) &&
                     <div class="col-lg-8 ">
                     
@@ -50,7 +54,7 @@ export default class detail extends Component
                     </div>
                 }
                     <div class="col-lg-4 sidebar pl-lg-5 e">
-                        <div class="sidebar-box ">
+                        {/* <div class="sidebar-box ">
                             <div class="categories">
                             <h3>Categories</h3>
                             <li><a href="#">Illustration <span class="ion-ios-arrow-forward"></span></a></li>
@@ -59,20 +63,22 @@ export default class detail extends Component
                             <li><a href="#">Design <span class="ion-ios-arrow-forward"></span></a></li>
                             <li><a href="#">Marketing <span class="ion-ios-arrow-forward"></span></a></li>
                             </div>
-                        </div>
+                        </div> */}
                         <div class="sidebar-box">
-                        <h3>Recent Blog</h3>
+                        <h3>Recent News</h3>
+                        {(this.state.recent) &&
+                        this.state.recent.map((opt) =>( 
                         <div class="block-21 mb-4 d-flex">
-                            <a class="blog-img mr-4"></a>
+                           <img src={opt.img} alt="newsimage" class="blog-img mr-4" />
                             <div class="text">
-                                <h3 class="heading"><a href="#">MontrealTimes gives latest news in the city!</a></h3>
+                                <h3 class="heading"><a href={'/detail/' + opt.id}>{opt.title}</a></h3>
                                 <div class="meta">
-                                <div><a href="#"><span class="icon-calendar"></span> Nov. 14, 2019</a></div>
-                                <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                                <div><a href="#"><span class="icon-person"></span> {opt.category_name}</a></div>
                                 </div>
                             </div>
                         </div>
+                        ))}
+                        
                     </div>
                     </div>
 
@@ -81,6 +87,7 @@ export default class detail extends Component
                 </div>
     
             </div>
+        </div>
             
             ); 
     }

@@ -3,6 +3,7 @@ import {Redirect} from 'react-router-dom';
 import '../home.css';
 import history from './../history';
 import Header from './common/header'
+import { Link } from 'react-router';
 export default class Home extends Component
 {
     constructor(props) 
@@ -88,7 +89,7 @@ render()
             <div class="container">
             <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start" data-scrollax-parent="true">
                 <div class="col-md-12">
-  <h2 class="subheading">Welcome, {}</h2>
+                    <h2 class="subheading">Welcome, {this.props.match.params.name}</h2>
                     <h1 class="mb-4 mb-md-0">MontrealTimes</h1>
                     <div class="row">
                         <div class="col-md-7">
@@ -111,19 +112,22 @@ render()
    			<div class="row">
    				<div class="col-md-12">
    					<div class="case">
-               {this.state.news.map((opt) =>(
-                                                                 
+              {this.props.match.params.name!=='all' &&
+               this.state.news.map((opt) =>(
+               this.props.match.params.name===opt.category_name &&     
+                                                 
                                   
    						<div class="row">
    							<div class="col-md-6 col-lg-6 col-xl-8 d-flex">
-                                   <img  class="img w-100 mb-3 mb-md-0" src={opt.img}/>
+                                   <img  class="img w-100 mb-3 mb-md-0" alt="newsImage" src={opt.img}/>
                                    {/* <img src="https://images.pexels.com/photos/112460/pexels-photo-112460.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"/> */}
    								{/* <a href="blog-single.html" class="img w-100 mb-3 mb-md-0" style="background-image: url(images/image_1.jpg);"></a> */}
    							</div>
    							<div class="col-md-6 col-lg-6 col-xl-4 d-flex">
    								<div class="text w-100 pl-md-3">
                       <span class="subheading">{opt.category_name}</span>
-                        <h2><a onClick={()=>history.push('/detail/'+opt.id)}>{opt.title}</a></h2>
+                        {/* <h2><a onClick={()=>history.push('/detail/'+opt.id)}>{opt.title}</a></h2> */}
+                        <h2><a href={'/detail/' + opt.id}>{opt.title}</a></h2>
    									<ul class="media-social list-unstyled">
 			                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
 			                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
@@ -137,6 +141,35 @@ render()
    						</div>
 
                 ))}
+               {this.props.match.params.name==='all'&&
+               this.state.news.map((opt) =>(
+                                  
+   						<div class="row">
+   							<div class="col-md-6 col-lg-6 col-xl-8 d-flex">
+                                   <img  class="img w-100 mb-3 mb-md-0" alt="newsImage" src={opt.img}/>
+                                   {/* <img src="https://images.pexels.com/photos/112460/pexels-photo-112460.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"/> */}
+   								{/* <a href="blog-single.html" class="img w-100 mb-3 mb-md-0" style="background-image: url(images/image_1.jpg);"></a> */}
+   							</div>
+   							<div class="col-md-6 col-lg-6 col-xl-4 d-flex">
+   								<div class="text w-100 pl-md-3">
+                      <span class="subheading">{opt.category_name}</span>
+                        {/* <h2><a onClick={()=>history.push('/detail/'+opt.id)}>{opt.title}</a></h2> */}
+                        <h2><a href={'/detail/' + opt.id}>{opt.title}</a></h2>
+   									<ul class="media-social list-unstyled">
+			                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+			                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+			                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+			              </ul>
+   									<div class="meta">
+   										<p class="mb-0"><a href="#">{opt.created_at.toString()}</a></p>
+   									</div>
+   								</div>
+   							</div>
+   						</div>
+
+                ))}
+
+
    					</div>
    				</div>
    			</div>
